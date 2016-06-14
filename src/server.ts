@@ -1,20 +1,46 @@
 import http from 'http';
+import express from 'express';
+let requestHandler = require('./server/handler').requestHandler;
 
-let app = require('./server/handler').app;
+interface WrappedHandler{
+	(req,res,next):any;
+	swap(r):this
+}
 
-const server = http.createServer();
+function requestHandlerWrapper(requestHandler){
+	const wrappedHandler:WrappedHandler = <WrappedHandler>function(req,res,next){
+		return requestHandler(req,res,next);
+	}
+	wrappedHandler.swap = function(newRequestHandler){
+		requestHandler = newRequestHandler;
+		return this;
+	}
+	return wrappedHandler;
+}
 
-server.on("request", app);
+const wrappedHandler = requestHandlerWrapper(requestHandler);
 
-server.listen(__PORT__,()=>{
-	console.log(`listening on ${__URL__}`);
-});
+const app = express();
 
+
+export default function listen(cb){
+
+	app.use(wrappedHandler);
+
+	const server = http.createServer(app);
+
+	server.listen(__PORT__,()=>{
+		console.log(`listening on ${__URL__}`);
+		cb && cb();
+	});
+
+	return server;
+	
+}
 
 if(module.hot) {
 	module.hot.accept("./server/handler",()=>{
-		server.removeListener("request", app);
-		app = require("./server/handler").app;
-		server.on("request", app);
+		requestHandler = require("./server/handler").requestHandler;
+		wrappedHandler.swap(requestHandler);
 	});
 }

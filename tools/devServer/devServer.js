@@ -40,8 +40,10 @@ module.exports = function(CONSTS,cb){
 		console.log('path',server_bundle_path);
 		//const server = require(bundle_path);
 		//console.log('server',server);
-		require(server_bundle_path);
-		cb && cb()
+		require(server_bundle_path).default(function(){
+			console.log('first compilation succeeded');
+			cb && cb();
+		});
 	});
 
 }
