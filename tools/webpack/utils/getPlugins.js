@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const pluginsConfigs = require('../pluginsConfigs');
+const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 module.exports = function getPlugins(CONSTS){
 
@@ -28,6 +29,7 @@ module.exports = function getPlugins(CONSTS){
 			])
 		//, new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js')
 		, new webpack.DefinePlugin(GLOBS)
+		, new ForkCheckerPlugin()
 		, DEV && new webpack.optimize.OccurenceOrderPlugin()
 		, DEV && new webpack.HotModuleReplacementPlugin()
 		, new webpack.NoErrorsPlugin()

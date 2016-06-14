@@ -28,7 +28,7 @@ const DEF =
 	, FONTS_OUTPUT_DIR:  process.env.FONTS_OUTPUT_DIR   || 'fonts'
 	, IMAGES_OUTPUT_DIR: process.env.IMAGES_OUTPUT_DIR  || 'images'
 	, SERVER_OUTPUT_DIR: process.env.SERVER_OUTPUT_DIR  || ''
-	, ASSETS_OUTPUT_DIR: process.env.ASSETS_OUTPUT_DIR  || 'public'
+	, ASSETS_OUTPUT_DIR: process.env.ASSETS_OUTPUT_DIR  || 'static'
 	, STYLE_BUNDLE_NAME: process.env.STYLE_BUNDLE_NAME  || 'app'
 	, STYLES_DIR:        process.env.STYLES_DIR         || 'src/styles'
 	, BUILD_TYPE:        process.env.BUILD_TYPE         || 'client'

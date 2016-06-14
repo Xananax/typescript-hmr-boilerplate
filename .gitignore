@@ -6,3 +6,4 @@ dist/
 typings/*
 test/*
 npm-debug.log
+.awcache

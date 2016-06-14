@@ -34,8 +34,16 @@ module.exports = function(CONSTS){
 			{ extensions:[ 'ts', 'tsx' ]
 			, loader:
 				[	DEV && [ 'react-hot' ]
-				,	[ 'babel', babelConfig ]
-				,	'ts-loader'
+				//,	[ 'babel', babelConfig ]
+				,	[ 'awesome-typescript-loader'
+					,	{ library:"es6"
+						, doTypeCheck:true
+						, forkChecker:true
+						, useBabel:true
+						, babelOptions:babelConfig
+						, useCache:true
+						}
+					]
 				]
 			, include: PATHS.CLIENT
 			, exclude: node_modules_regexp

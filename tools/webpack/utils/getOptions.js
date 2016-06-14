@@ -38,7 +38,7 @@ module.exports = function getOptions(env){
 	const SERVER_PATH = (env.PATHS && env.PATHS.SERVER) || path.resolve(ROOT,DIRS.SERVER);
 
 	const PATHS = 
-		{ ROOT:(env.PATHS && env.PARELPATHSTHS.ROOT) || ROOT
+		{ ROOT:(env.PATHS && env.PATHS.ROOT) || ROOT
 		, SOURCES:(env.PATHS && env.PATHS.SOURCES) || path.resolve(ROOT,DIRS.SOURCES)
 		, DISTRIBUTION:(env.PATHS && env.PATHS.DISTRIBUTION) || path.resolve(ROOT,DIRS.DISTRIBUTION)
 		, PUBLIC:(env.PATHS && env.PATHS.PUBLIC) || path.resolve(ROOT,DIRS.PUBLIC)
