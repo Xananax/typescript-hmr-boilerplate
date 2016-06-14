@@ -13,7 +13,7 @@ const DEF =
 	, HOT_PORT:          process.env.HOT_PORT           || 3000
 	, HOSTNAME:          process.env.HOSTNAME           || 'localhost'
 	, SOURCES_DIR:       process.env.SOURCES_DIR        || 'src'
-	, ASSETS_DIR:        process.env.ASSETS_DIR         || 'static/images'
+	, ASSETS_DIR:        process.env.ASSETS_DIR         || 'static'
 	, PUBLIC_DIR:        process.env.PUBLIC_DIR         || 'static'
 	, DISTRIBUTION_DIR:  process.env.DISTRIBUTION_DIR   || 'dist'
 	, DEBUG:             !!(process.env.DEBUG)          || false
@@ -27,8 +27,8 @@ const DEF =
 	, CSS_OUTPUT_DIR:    process.env.CLIENT_OUTPUT_DIR  || 'css'
 	, FONTS_OUTPUT_DIR:  process.env.FONTS_OUTPUT_DIR   || 'fonts'
 	, IMAGES_OUTPUT_DIR: process.env.IMAGES_OUTPUT_DIR  || 'images'
-	, SERVER_OUTPUT_DIR: process.env.SERVER_OUTPUT_DIR  || 'dist'
-	, ASSETS_OUTPUT_DIR: process.env.ASSETS_OUTPUT_DIR  || 'dist/public'
+	, SERVER_OUTPUT_DIR: process.env.SERVER_OUTPUT_DIR  || ''
+	, ASSETS_OUTPUT_DIR: process.env.ASSETS_OUTPUT_DIR  || 'public'
 	, STYLE_BUNDLE_NAME: process.env.STYLE_BUNDLE_NAME  || 'app'
 	, STYLES_DIR:        process.env.STYLES_DIR         || 'src/styles'
 	, BUILD_TYPE:        process.env.BUILD_TYPE         || 'client'

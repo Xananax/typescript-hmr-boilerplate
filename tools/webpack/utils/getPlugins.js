@@ -23,7 +23,7 @@ module.exports = function getPlugins(CONSTS){
 		, PROD && new CopyWebpackPlugin
 			([
 				{ from: PATHS.ASSETS
-				, to: OUT.IMAGES
+				, to: OUT.ASSETS
 				}
 			])
 		//, new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js')

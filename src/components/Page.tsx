@@ -35,7 +35,7 @@ export function Page(props){
 		,	...props.metatags
 		].filter(Boolean);
 	return (<HTMLDocument title={title} scripts={scripts} stylesheets={stylesheets} metatags={metatags}>
-		<h1>Test</h1>
+		<h1>Testdsi</h1>
 		<div id='Root'>
 			{props && props.children}
 		</div>

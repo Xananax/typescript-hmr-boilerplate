@@ -10,10 +10,14 @@ module.exports = function(CONSTS){
 	const compiler = webpack(webpackConfig);
 	const serverBundleName = CONSTS.SERVER_BUNDLE_NAME;
 	
+	const { OUT, DIRS, SERVER_BUNDLE_NAME } = CONSTS;
+
 	const bundle_path = path.resolve(
-		webpackConfig.output.path
-	,	webpackConfig.output.filename.replace(/\[name\]/,serverBundleName)
-	);
+		DIRS.ROOT
+	,	DIRS.DISTRIBUTION
+	,	OUT.SERVER
+	,	SERVER_BUNDLE_NAME
+	)+'.js';
 
 	const controller = webpackWatcher(compiler,makeWatcherOptions(webpackConfig.devServer));
 	//const fs = new MemoryFS();
@@ -21,8 +25,9 @@ module.exports = function(CONSTS){
 
 	controller.watch(function(){
 		console.log('path',bundle_path);
-		const server = require(bundle_path);
-		console.log('server',server);
+		//const server = require(bundle_path);
+		//console.log('server',server);
+		require(bundle_path);
 	});
 
 }

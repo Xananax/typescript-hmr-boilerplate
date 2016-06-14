@@ -29,6 +29,7 @@ module.exports = function(CONSTS){
 		, CLIENT_BUNDLE_NAME
 		, SERVER_BUNDLE_NAME
 		, HOT_URL
+		, OUT
 		} = CONSTS;
 
 	const target = BUILD_TYPE_SERVER ? 'node' : 'web'; 
@@ -55,7 +56,7 @@ module.exports = function(CONSTS){
 
 	const output = 
 		{ path: PATHS.DISTRIBUTION
-		, filename: 'js/[name].js'
+		, filename: BUILD_TYPE_SERVER ? `${OUT.SERVER}/[name].js` : `${OUT.CLIENT}/[name].js` 
 		, publicPath: '/'
 		, libraryTarget: BUILD_TYPE_SERVER ? 'commonjs2' : 'var'
 		};
@@ -117,7 +118,7 @@ module.exports = function(CONSTS){
 			{ contentBase: PATHS.PUBLIC
 			, port: HOT_PORT
 			, noInfo: false
-			, quiet: true
+			, quiet: false
 			, lazy: false
 			, publicPath: '/'
 			, hot:
