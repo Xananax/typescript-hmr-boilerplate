@@ -1,20 +1,18 @@
 const rimraf = require('rimraf');
 const path = require('path');
 const fs = require('fs');
-const mkdirp = require('mkdirp');
-const getOptions = require('../webpack/utils/getOptions');
-const options = require('../../config');
+const create = require('./create');
 
-const CONSTS = getOptions(options);
-const dir = CONSTS.PATHS.DISTRIBUTION;
-
-rimraf(dir,(err)=>{
-
-	if(err){throw err;}
+module.exports = function clean(_,CONSTS,cb){
 	
-	if (process.argv.indexOf("createdir") >= 0) {
-		mkdirp(dir,(err)=>{
-			if(err){throw err;}
-		})
-	}
-});
+	const dir = CONSTS.PATHS.DISTRIBUTION;
+
+	rimraf(dir,(err)=>{
+
+		if(err){return cb(err);}
+
+		console.log(`cleaned \`${dir}\``);
+
+		cb();
+	});
+} 

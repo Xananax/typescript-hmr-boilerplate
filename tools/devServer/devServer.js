@@ -9,7 +9,7 @@ function assign(obj1,obj2){
 	return Object.assign({},obj1,obj2);
 }
 
-module.exports = function(CONSTS){
+module.exports = function(CONSTS,cb){
 
 	const SERVER_CONSTS = getOptions(assign(CONSTS,{BUILD_TYPE:'client'}));
 	const CLIENT_CONSTS = getOptions(assign(CONSTS,{BUILD_TYPE:'server'}));
@@ -41,6 +41,7 @@ module.exports = function(CONSTS){
 		//const server = require(bundle_path);
 		//console.log('server',server);
 		require(server_bundle_path);
+		cb && cb()
 	});
 
 }

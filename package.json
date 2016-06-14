@@ -92,7 +92,11 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "task":"node ./tools/run",
+    "clean":"npm run task clean",
+    "create":"npm run task create",
+    "clean:create":"npm run task clean create"
   },
   "repository": {
     "type": "git",
