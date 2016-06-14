@@ -12,7 +12,7 @@ const stylesLoaders =
 
 module.exports = function(CONSTS){
 	
-	const {DEV,PROD,PATHS,OUT} = CONSTS;
+	const {DEV,PROD,PATHS,OUT,BUILD_TYPE_SERVER} = CONSTS;
 	const node_modules_regexp = /node_modules/;
 
 	const sassLoader = 
@@ -42,20 +42,46 @@ module.exports = function(CONSTS){
 			}
 		, 'scss':
 			{ extensions:[ 'scss' , 'sass' ]
-			, loader: DEV ?
-				[ 'style-loader'
-				, ...stylesLoaders
-				, sassLoader
-				] :
-				ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders,sassLoader]))
+			, loader: BUILD_TYPE_SERVER ?
+				'ignore-loader' : 
+				DEV ?
+					[ 'style-loader'
+					, ...stylesLoaders
+					, sassLoader
+					] :
+					ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders,sassLoader]))
+			}
+		, 'styl':
+			{ extensions:[ 'styl' , 'stylus' ]
+			, loader: BUILD_TYPE_SERVER ?
+				'ignore-loader' : 
+				DEV ?
+					[ 'style-loader'
+					, ...stylesLoaders
+					, 'stylus-loader'
+					] :
+					ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders,'stylus-loader']))
+			}
+		, 'less':
+			{ extensions:[ 'less' ]
+			, loader: BUILD_TYPE_SERVER ?
+				'ignore-loader' : 
+				DEV ?
+					[ 'style-loader'
+					, ...stylesLoaders
+					, 'less-loader'
+					] :
+					ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders,'less-loader']))
 			}
 		, 'css':
 			{ extensions:[ 'css' ]
-			, loader: DEV ? 
-				[ 'style-loader'
-				, ...stylesLoaders
-				] :
-				ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders]))
+			, loader: BUILD_TYPE_SERVER ?
+				'ignore-loader' : 
+				DEV ? 
+					[ 'style-loader'
+					, ...stylesLoaders
+					] :
+					ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders]))
 			}
 		, 'images':
 			{ extensions:['png','jpg','jpeg','gif','svg']

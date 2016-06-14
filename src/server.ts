@@ -1,21 +1,22 @@
 import ReactDOM from 'react-dom/server';
 import http from 'http';
 import express from 'express';
-import {routes} from './routes';
 import {match, RouterContext} from 'react-router';
+
+import * as R from './routes';
+
+let Page = require('./components/Page').Page;
+let routes = R.routes;
+
+
 const renderToStaticMarkup = ReactDOM.renderToStaticMarkup;
 const renderToString = ReactDOM.renderToString;
-const userOptions = require('../config');
-const getOptions = require('../tools/webpack/utils/getOptions');
-const CONSTS = getOptions(userOptions);
-const addWebpackToExpressServer = require('../tools/webpack/addWebpackToExpressServer')
-const Page = require('./components/Page').Page;
+//const addWebpackToExpressServer = require('../tools/webpack/addWebpackToExpressServer')
 
 const app = express();
 
-const {PORT,URL,DEV,HOT_URL} = CONSTS;
+//addWebpackToExpressServer(app,CONSTS);
 
-addWebpackToExpressServer(app,CONSTS);
 
 app.use
 	( (req, res, next)=>
@@ -39,7 +40,7 @@ app.use
 					// your "not found" component or route respectively, and send a 404 as
 					// below, if you're using a catch-all route.
 						//res.status(200).send(renderToString(<RouterContext {...renderProps} />));
-						const doc = DEV? Page() : Page({ stylesheets:['/css/app.css']});
+						const doc = __DEV__ ? Page() : Page({ stylesheets:['/css/app.css'] });
 						const markup = renderToStaticMarkup(doc);
 						res.send(markup);
 					} else {
@@ -55,6 +56,16 @@ app.use
 
 const server = http.createServer(app);
 
-server.listen(PORT,()=>{
-	console.log(`listening on ${URL}`);
+server.listen(__PORT__,()=>{
+	console.log(`listening on ${__URL__}`);
 });
+
+if(module.hot) {
+	module.hot.accept(
+		['./routes','../config']
+	, ()=>{
+		console.log('>>> changed');
+		Page = require('./components/Page').Page;
+		routes = require('./routes').routes;
+	});
+}

@@ -5,7 +5,7 @@ const pluginsConfigs = require('../pluginsConfigs');
 
 module.exports = function getPlugins(CONSTS){
 
-	const {DEV,PROD,DEBUG,PATHS,GLOBALS,OUT,BUILD_TYPE_SERVER} = CONSTS;
+	const {DEV,PROD,DEBUG,PATHS,GLOBALS,OUT,BUILD_TYPE_SERVER,BUILD_TYPE_CLIENT} = CONSTS;
 
 	// Ignore CSS:
 	// new webpack.IgnorePlugin(/\.(css|less|stylus|styl|scss|sass)$/)
@@ -26,15 +26,14 @@ module.exports = function getPlugins(CONSTS){
 				, to: OUT.IMAGES
 				}
 			])
-		, new webpack.optimize.CommonsChunkPlugin
-			('vendor', 'js/vendor.bundle.js')
+		//, new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js')
 		, new webpack.DefinePlugin(GLOBS)
 		, DEV && new webpack.optimize.OccurenceOrderPlugin()
 		, DEV && new webpack.HotModuleReplacementPlugin()
 		, new webpack.NoErrorsPlugin()
 		, PROD && new webpack.optimize.DedupePlugin()
 		, PROD && new webpack.optimize.UglifyJsPlugin(pluginsConfigs.uglify)
-		, PROD && new ExtractTextPlugin(OUT.CSS,pluginsConfigs.extractText)
+		, BUILD_TYPE_CLIENT && PROD && new ExtractTextPlugin(OUT.CSS,pluginsConfigs.extractText)
 		].filter(Boolean)
 	);
 }

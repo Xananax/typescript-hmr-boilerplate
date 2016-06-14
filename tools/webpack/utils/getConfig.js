@@ -80,7 +80,7 @@ module.exports = function(CONSTS){
 
 	const node = 
 		BUILD_TYPE_SERVER &&
-		{ console: false
+		{ console: true
 		, global: true
 		, process: true
 		, Buffer: true
@@ -116,22 +116,27 @@ module.exports = function(CONSTS){
 		, devServer:
 			{ contentBase: PATHS.PUBLIC
 			, port: HOT_PORT
-			, noInfo: true
-			, quiet: false
+			, noInfo: false
+			, quiet: true
 			, lazy: false
 			, publicPath: '/'
+			, hot:
+				{ overlay: false
+				, reload: false
+				}
 			, stats:
 				{ colors: true
 				}
-			, watchOptions:{}
+			, watchOptions:
+				{ 
 				/*
-				{ aggregateTimeout: 300
+				  aggregateTimeout: 300
 				, poll: 1000
-				}
 				*/
+				}
 			}
 		, env : DEV && process.env.NODE_ENV
-		, devtool: DEV ? 'eval' : 'source-map'
+		, devtool: 'source-map'
 		, node
 		}
 	)
