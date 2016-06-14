@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+build/
+dist/
+*.log*
+typings/*
+test/*
+npm-debug.log

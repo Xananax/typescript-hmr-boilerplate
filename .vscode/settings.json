@@ -1,0 +1,14 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+	"files.exclude":
+		{ "**/.git": true
+		, "**/.svn": true
+		, "**/.DS_Store": true
+		, "typings":true
+		, "node_modules":true
+		, ".vscode":true
+		, "typings.json":true
+		, ".*":true
+		, "?sconfig.json":false
+		}
+}
