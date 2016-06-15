@@ -134,6 +134,6 @@ module.exports = function webpackWatcher(compiler,options){
 			{ callback(); }
 	};
 
-	return {watch,waitUntilValid,invalidate,close}
+	return {watch,waitUntilValid,invalidate,close,ready}
 	
 }

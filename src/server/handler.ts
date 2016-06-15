@@ -7,8 +7,8 @@ let Page = require('../components/Page').Page;
 let routes = require('../routes').routes;
 
 
-//const renderToStaticMarkup = ReactDOM.renderToStaticMarkup;
-const renderToString = ReactDOM.renderToString;
+const renderToStaticMarkup = ReactDOM.renderToStaticMarkup;
+//const renderToString = ReactDOM.renderToString;
 //const addWebpackToExpressServer = require('../tools/webpack/addWebpackToExpressServer')
 
 const app = express();
@@ -38,10 +38,9 @@ export function requestHandler(req, res, next)
 				// below, if you're using a catch-all route.
 					//res.status(200).send(renderToString(<RouterContext {...renderProps} />));
 					const doc = __DEV__ ? React.createElement(Page) : React.createElement(Page,{ stylesheets:['/css/app.css'] });
-					
-					//const markup = renderToString(doc);
-					//res.send(markup);
-					res.send('ok')
+					const markup = renderToStaticMarkup(doc);
+					res.send(markup);
+					//res.send('ok')
 				} else {
 					res
 						.status(404)

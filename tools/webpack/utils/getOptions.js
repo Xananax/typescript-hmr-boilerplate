@@ -41,9 +41,9 @@ module.exports = function getOptions(env){
 		{ ROOT:(env.PATHS && env.PATHS.ROOT) || ROOT
 		, SOURCES:(env.PATHS && env.PATHS.SOURCES) || path.resolve(ROOT,DIRS.SOURCES)
 		, DISTRIBUTION:(env.PATHS && env.PATHS.DISTRIBUTION) || path.resolve(ROOT,DIRS.DISTRIBUTION)
-		, PUBLIC:(env.PATHS && env.PATHS.PUBLIC) || path.resolve(ROOT,DIRS.PUBLIC)
-		, STYLES:(env.PATHS && env.PATHS.STYLES) || path.resolve(ROOT,DIRS.STYLES)
-		, ASSETS:(env.PATHS && env.PATHS.ASSETS) || path.resolve(ROOT,DIRS.ASSETS)
+		, PUBLIC:(env.PATHS && env.PATHS.PUBLIC) || path.resolve(ROOT,DIRS.DISTRIBUTION,DIRS.PUBLIC)
+		, STYLES:(env.PATHS && env.PATHS.STYLES) || path.resolve(ROOT,DIRS.DISTRIBUTION,DIRS.STYLES)
+		, ASSETS:(env.PATHS && env.PATHS.ASSETS) || path.resolve(ROOT,DIRS.DISTRIBUTION,DIRS.ASSETS)
 		, CLIENT:CLIENT_PATH
 		, SERVER:SERVER_PATH
 		, CLIENT_FILE:(env.PATHS && env.PATHS.CLIENT_FILE) || path.resolve(CLIENT_PATH,FILES.CLIENT)

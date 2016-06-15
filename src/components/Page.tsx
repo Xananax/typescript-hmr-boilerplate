@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Children} from 'react';
 import HTMLDocument from 'react-html-document';
 import ReactDOM from 'react-dom/server';
 import assign from '../utils/assign';
@@ -15,8 +15,7 @@ export function Page(props){
 
 	const {title,description} = props; 
 	const scripts =
-		[ '/js/vendor.bundle.js'
-		, '/js/app.js'
+		[ '/js/app.js'
 		, ...props.scripts
 		].filter(Boolean);
 	const stylesheets =
@@ -34,10 +33,14 @@ export function Page(props){
 			}
 		,	...props.metatags
 		].filter(Boolean);
+
+	const content = (props && props.children && Children.count(props.children)) || (<div>no content provided</div>);
+
+	const body = (<div id="Wrapper">
+		<h1>Test!RRR!!PP</h1>
+		<div id='Root'>{content}</div>
+	</div>)
 	return (<HTMLDocument title={title} scripts={scripts} stylesheets={stylesheets} metatags={metatags}>
-		<h1>Testdsi</h1>
-		<div id='Root'>
-			{props && props.children}
-		</div>
+		{body}	
 	</HTMLDocument>);
 }

@@ -85,8 +85,8 @@ module.exports = function(CONSTS){
 		, global: true
 		, process: true
 		, Buffer: true
-		, __filename: "mock"
-		, __dirname: "mock"
+		, __filename: true
+		, __dirname: true
 		, setImmediate: true
 		}
 

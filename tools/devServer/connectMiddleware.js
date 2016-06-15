@@ -3,6 +3,7 @@ const mime = require("mime");
 const parseRange = require("range-parser");
 const webpackWatcher = require('./webpackWatcher');
 const HASH_REGEXP = /[0-9a-f]{10,}/;
+const fs = require('fs');
 
 function pathJoin(a, b) {
 		return a == "/" ? "/" + b : (a||"") + "/" + b
@@ -54,11 +55,12 @@ function _getFilenameFromUrl(outputPath,publicPath,url){
 	return filename ? pathJoin(outputPath, filename) : outputPath;
 }
 
-function middleware(compiler,options){
+module.exports = function middleware(compiler,options,watcher){
 
-	const fs = compiler.outputFileSystem = new MemoryFileSystem();
+	//const fs = compiler.outputFileSystem = new MemoryFs();
 	const getFilenameFromUrl = _getFilenameFromUrl.bind(null,compiler.outputPath,options.publicPath);
-	const {watch,waitUntilValid,invalidate,close} = webpackWatcher(compiler,options);
+	watcher = watcher || webpackWatcher(compiler,options);
+	const {watch,waitUntilValid,invalidate,close,ready} = watcher;
 
 
 	function webpackDevMiddleware(req, res, next) {

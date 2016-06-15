@@ -1,5 +1,7 @@
 import http from 'http';
 import express from 'express';
+//const webpackMiddleware = require("webpack-dev-middleware");
+const webpackHotMiddleware = require("webpack-hot-middleware");
 let requestHandler = require('./server/handler').requestHandler;
 
 interface WrappedHandler{
@@ -23,7 +25,14 @@ const wrappedHandler = requestHandlerWrapper(requestHandler);
 const app = express();
 
 
-export default function listen(cb){
+export default function listen(compiler,webpackConfig,webpackMiddleware,cb){
+	app.use(function(req,res,next){console.log(req.url);return next()});
+
+	
+	app.use(webpackMiddleware);
+	app.use(webpackHotMiddleware(compiler));
+	
+	app.use(express.static(webpackConfig.devServer.contentBase));
 
 	app.use(wrappedHandler);
 
@@ -35,7 +44,7 @@ export default function listen(cb){
 	});
 
 	return server;
-	
+
 }
 
 if(module.hot) {
