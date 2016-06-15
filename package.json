@@ -72,6 +72,7 @@
     "redux-thunk": "2.1.0",
     "rimraf": "*",
     "sass-loader": "3.2.0",
+    "socket.io": "1.4.6",
     "source-map-loader": "0.1.5",
     "source-map-support": "0.4.0",
     "style-loader": "0.13.1",
@@ -93,11 +94,11 @@
   },
   "scripts": {
     "test": "mocha",
-    "task":"node ./tools/run",
-    "clean":"npm run task clean",
-    "create":"npm run task create",
-    "clean:create":"npm run task clean create",
-    "dev":"npm run task dev"
+    "task": "node ./tools/run",
+    "clean": "npm run task clean",
+    "create": "npm run task create",
+    "clean:create": "npm run task clean create",
+    "dev": "npm run task dev"
   },
   "repository": {
     "type": "git",

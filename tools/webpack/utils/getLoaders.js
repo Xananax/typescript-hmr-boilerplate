@@ -12,7 +12,7 @@ const stylesLoaders =
 
 module.exports = function(CONSTS){
 	
-	const {DEV,PROD,PATHS,OUT,BUILD_TYPE_SERVER} = CONSTS;
+	const {DEV,PROD,PATHS,OUT,BUILD_TYPE_SERVER,BUILD_TYPE_CLIENT } = CONSTS;
 	const node_modules_regexp = /node_modules/;
 
 	const sassLoader = 
@@ -24,7 +24,7 @@ module.exports = function(CONSTS){
 		{ 'js':
 			{ extensions:[ 'js', 'jsx' ]
 			, loader:
-				[	DEV && [ 'react-hot' ]
+				[	DEV && BUILD_TYPE_CLIENT && [ 'react-hot' ]
 				,	[ 'babel', babelConfig ]
 				]
 			, include: PATHS.CLIENT
@@ -33,7 +33,7 @@ module.exports = function(CONSTS){
 		, 'ts':
 			{ extensions:[ 'ts', 'tsx' ]
 			, loader:
-				[	DEV && [ 'react-hot' ]
+				[	DEV && BUILD_TYPE_CLIENT && [ 'react-hot' ]
 				//,	[ 'babel', babelConfig ]
 				,	[ 'awesome-typescript-loader'
 					,	{ library:"es6"

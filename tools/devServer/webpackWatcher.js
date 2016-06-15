@@ -1,6 +1,6 @@
 function noOp(){};
 
-module.exports = function webpackWatcher(compiler,options){
+module.exports = function webpackWatcher(name,compiler,options){
 
 	let state = false;
 	let forceRebuild = false;
@@ -11,7 +11,7 @@ module.exports = function webpackWatcher(compiler,options){
 		{
 			if(state && (!options.noInfo && !options.quiet))
 				{ 
-					console.info("webpack: bundle is now INVALID."); 
+					console.info(`webpack[${name}]: bundle is now INVALID.`); 
 				}
 			state = false;
 		}
@@ -28,7 +28,7 @@ module.exports = function webpackWatcher(compiler,options){
 				{ return fn(); }
 			if(!options.noInfo && !options.quiet)
 				{ 
-					console.log("webpack: wait until bundle finished: " + (req.url || fn.name)); 
+					console.log(`webpack[${name}]: wait until bundle finished: ` + (req.url || fn.name)); 
 				}
 			callbacks.push(fn);
 		}
@@ -67,14 +67,14 @@ module.exports = function webpackWatcher(compiler,options){
 					console.log(stats.toString(options.stats));
 				}
 				if(!options.noInfo && !options.quiet){
-					console.info("webpack: bundle is now VALID.");
+					console.info(`webpack[${name}]: bundle is now VALID.`);
 				}
 
-					console.info("webpack: rebuilt");
+					console.info(`webpack[${name}]: rebuilt`);
 				const cbs = callbacks;
 				callbacks = [];
 				cbs.forEach(
-					function continueBecauseBundleAvailible(cb){
+					function continueBecauseBundleAvailable(cb){
 						cb();
 					}
 				);

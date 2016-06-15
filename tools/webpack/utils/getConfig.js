@@ -59,6 +59,8 @@ module.exports = function(CONSTS){
 		, filename: BUILD_TYPE_SERVER ? `${OUT.SERVER}/[name].js` : `${OUT.CLIENT}/[name].js` 
 		, publicPath: '/'
 		, libraryTarget: BUILD_TYPE_SERVER ? 'commonjs2' : 'var'
+		, hotUpdateChunkFilename: BUILD_TYPE_SERVER ? `${OUT.SERVER}/hot/[id].[hash].hot-update.js` : `/${OUT.CLIENT}/hot/[id].[hash].hot-update.js`
+		, hotUpdateMainFilename: BUILD_TYPE_SERVER ? `${OUT.SERVER}/hot/[hash].hot-update.json` : `/${OUT.CLIENT}/hot/[hash].hot-update.json`
 		};
 
 	const _module = Object.assign
@@ -85,8 +87,8 @@ module.exports = function(CONSTS){
 		, global: true
 		, process: true
 		, Buffer: true
-		, __filename: true
-		, __dirname: true
+		, __filename: false
+		, __dirname: false
 		, setImmediate: true
 		}
 
@@ -118,7 +120,7 @@ module.exports = function(CONSTS){
 			{ contentBase: PATHS.PUBLIC
 			, port: HOT_PORT
 			, noInfo: false
-			, quiet: false
+			, quiet: true
 			, lazy: false
 			, publicPath: '/'
 			, hot:

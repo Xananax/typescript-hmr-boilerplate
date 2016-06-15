@@ -26,10 +26,14 @@ const app = express();
 
 
 export default function listen(compiler,webpackConfig,webpackMiddleware,cb){
-	app.use(function(req,res,next){console.log(req.url);return next()});
 
-	
-	app.use(webpackMiddleware);
+	app.use(function(req,res,next){
+		console.log('request:',req.url);
+		return next();
+	});
+
+	//app.use(webpackMiddleware);
+
 	app.use(webpackHotMiddleware(compiler));
 	
 	app.use(express.static(webpackConfig.devServer.contentBase));

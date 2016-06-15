@@ -37,7 +37,7 @@ export function Page(props){
 	const content = (props && props.children && Children.count(props.children)) || (<div>no content provided</div>);
 
 	const body = (<div id="Wrapper">
-		<h1>Test!RRR!!PP</h1>
+		<h1>TestsddddddDDDDDdddds(</h1>
 		<div id='Root'>{content}</div>
 	</div>)
 	return (<HTMLDocument title={title} scripts={scripts} stylesheets={stylesheets} metatags={metatags}>
