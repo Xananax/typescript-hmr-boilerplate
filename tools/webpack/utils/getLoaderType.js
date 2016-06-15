@@ -10,6 +10,21 @@ const types =
 		]	
 	]
 
+/**
+ * takes an array of extensions and returns a generic type.
+ * Used in `parseLoaders` to add a `type` property to loaders
+ * This property does nothing, it's just useful for further processing
+ * in case any is needed:
+ * 
+ * ```
+ * 	config.loaders.forEach(function(loader){
+ * 		if(loader.type == 'style'){
+ * 		// do something
+ * 		}
+ * 	})
+ * ```
+ * @param  {string[]} exts an array of extensions (without leading dot)
+ */
 module.exports = function getLoaderType(exts){
 	let j = exts.length;
 	while(j--){

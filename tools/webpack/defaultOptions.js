@@ -33,6 +33,7 @@ const DEF =
 	, STYLES_DIR:        process.env.STYLES_DIR         || 'src/styles'
 	, BUILD_TYPE:        process.env.BUILD_TYPE         || 'client'
 	, LOADERS:           process.env.LOADERS            || 'js,ts,css,scss,stylus,less,images,fonts'
+	, LOADERS_SKIP:      process.env.LOADERS_SKIP       || ''
 	};
 
 DEF.DIRS =

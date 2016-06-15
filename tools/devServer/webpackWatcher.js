@@ -1,5 +1,11 @@
 function noOp(){};
 
+/**
+ * Creates a watcher for webpack
+ * @param  {string} name a name to prepend to log output
+ * @param  {webpack compiler} compiler
+ * @param  {object} options an option of objects (must have been put through `makeWatcherOptions`)
+ */
 module.exports = function webpackWatcher(name,compiler,options){
 
 	let state = false;
@@ -11,7 +17,7 @@ module.exports = function webpackWatcher(name,compiler,options){
 		{
 			if(state && (!options.noInfo && !options.quiet))
 				{ 
-					console.info(`webpack[${name}]: bundle is now INVALID.`); 
+					console.info(`${name}: bundle is now INVALID.`); 
 				}
 			state = false;
 		}
@@ -28,7 +34,7 @@ module.exports = function webpackWatcher(name,compiler,options){
 				{ return fn(); }
 			if(!options.noInfo && !options.quiet)
 				{ 
-					console.log(`webpack[${name}]: wait until bundle finished: ` + (req.url || fn.name)); 
+					console.log(`${name}: wait until bundle finished: ` + (req.url || fn.name)); 
 				}
 			callbacks.push(fn);
 		}
@@ -67,10 +73,10 @@ module.exports = function webpackWatcher(name,compiler,options){
 					console.log(stats.toString(options.stats));
 				}
 				if(!options.noInfo && !options.quiet){
-					console.info(`webpack[${name}]: bundle is now VALID.`);
+					console.info(`${name}: bundle is now VALID.`);
 				}
 
-					console.info(`webpack[${name}]: rebuilt`);
+					console.info(`${name}: rebuilt`);
 				const cbs = callbacks;
 				callbacks = [];
 				cbs.forEach(

@@ -9,6 +9,6 @@
 		, ".vscode":true
 		, "typings.json":true
 		, ".*":true
-		, "?sconfig.json":false
+		, "?sconfig.json":true
 		}
 }

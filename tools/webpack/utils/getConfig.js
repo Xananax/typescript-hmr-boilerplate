@@ -4,13 +4,16 @@ const parseLoaders = require('./parseLoaders');
 const getPlugins = require('./getPlugins');
 const getExternals = require('./getExternals');
   
-
-module.exports = function(CONSTS){
+/**
+ * Returns a suitable webpack config
+ * @param  {object} CONSTS an object of options
+ */
+module.exports = function getConfig(CONSTS){
 
 	const extensions = ['','.web.js','.webpack.js'];
 	const rawLoaders = getLoaders(CONSTS);
 	const loaders = parseLoaders(CONSTS,rawLoaders,extensions);
-	const plugins = require('./getPlugins')(CONSTS);
+	const plugins = require('./getPlugins')(CONSTS,loaders);
 	const vendor = 
 		[ 'react'
 		, 'redux'
@@ -83,14 +86,15 @@ module.exports = function(CONSTS){
 
 	const node = 
 		BUILD_TYPE_SERVER &&
-		{ console: true
-		, global: true
-		, process: true
-		, Buffer: true
-		, __filename: false
-		, __dirname: false
-		, setImmediate: true
+		require('../pluginsConfigs/node');
+
+	const devServer = Object.assign(
+		{}
+	,	{ contentBase: PATHS.PUBLIC
+		, port: HOT_PORT
 		}
+	,	require('../pluginsConfigs/devServer')
+	);
 
 	return (
 		{ target
@@ -116,28 +120,7 @@ module.exports = function(CONSTS){
 						{ browsers: [ 'last 2 versions' ]
 						})
 				]
-		, devServer:
-			{ contentBase: PATHS.PUBLIC
-			, port: HOT_PORT
-			, noInfo: false
-			, quiet: true
-			, lazy: false
-			, publicPath: '/'
-			, hot:
-				{ overlay: false
-				, reload: false
-				}
-			, stats:
-				{ colors: true
-				}
-			, watchOptions:
-				{ 
-				/*
-				  aggregateTimeout: 300
-				, poll: 1000
-				*/
-				}
-			}
+		, devServer
 		, env : DEV && process.env.NODE_ENV
 		, devtool: 'source-map'
 		, node

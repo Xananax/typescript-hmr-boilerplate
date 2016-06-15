@@ -4,9 +4,25 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const pluginsConfigs = require('../pluginsConfigs');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
-module.exports = function getPlugins(CONSTS){
+/**
+ * Returns an array of plugins to be used in a webpack config
+ * @param  {object} CONSTS an object of options
+ * @param  {loader[]} loaders an array of loaders
+ */
+module.exports = function getPlugins(CONSTS,loaders){
 
-	const {DEV,PROD,DEBUG,PATHS,GLOBALS,OUT,BUILD_TYPE_SERVER,BUILD_TYPE_CLIENT} = CONSTS;
+	const 
+		{ DEV
+		, PROD
+		, DEBUG
+		, PATHS
+		, GLOBALS
+		, OUT
+		, BUILD_TYPE_SERVER
+		, BUILD_TYPE_CLIENT
+		} = CONSTS;
+
+	const includeTypeScript = loaders && loaders.some(function(loader){loader.extensions.indexOf('ts')>=0})
 
 	// Ignore CSS:
 	// new webpack.IgnorePlugin(/\.(css|less|stylus|styl|scss|sass)$/)
@@ -29,7 +45,7 @@ module.exports = function getPlugins(CONSTS){
 			])
 		//, new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js')
 		, new webpack.DefinePlugin(GLOBS)
-		, new ForkCheckerPlugin()
+		, includeTypeScript && new ForkCheckerPlugin()
 		, DEV && new webpack.optimize.OccurenceOrderPlugin()
 		, DEV && new webpack.HotModuleReplacementPlugin()
 		, new webpack.NoErrorsPlugin()

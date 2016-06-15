@@ -1,3 +1,6 @@
+/**
+ * This is currently not used in this config
+ */
 module.exports = 
 	{ execMap:
 		{ js: 'node' }

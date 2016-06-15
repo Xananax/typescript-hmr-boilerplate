@@ -3,6 +3,12 @@ const DEF = require('../defaultOptions');
 
 const p = (arr)=>arr.filter(Boolean).join('/');
 
+/**
+ * Takes a simple options object and returns a complex options object
+ * The return from this function is an object of options suitable in
+ * any of the wepackConfig functions
+ * @param  {object} env optional options
+ */
 module.exports = function getOptions(env){
 
 	env = env || DEF;
@@ -118,6 +124,7 @@ module.exports = function getOptions(env){
 		, VERSION: (env.VERSION) || DEF.VERSION
 		, TITLE: (env.TITLE) || DEF.TITLE
 		, LOADERS: (env.LOADERS) || DEF.LOADERS
+		, LOADERS_SKIP: (env.LOADERS_SKIP) || DEF.LOADERS_SKIP
 		, REACT:('REACT' in env) ? env.REACT : DEF.REACT
 		}
 	);

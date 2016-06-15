@@ -10,10 +10,42 @@ const stylesLoaders =
 	]
 
 
-module.exports = function(CONSTS){
+function doInclude(include,str){
+	return (include && include.indexOf(str) >= 0);
+}
+
+function _doSkip(include,skip,str){
+	const _doInclude = doInclude(include,str);
+	if(_doInclude){return false;}
+	const _doSkip = skip ? skip.indexOf(str) >= 0 : false;
+	if(_doSkip){return true;}
+	return false;
+}
+
+/**
+ * Returns an object of loaders.
+ * This object should be put through `parseLoaders` before
+ * being usable in a webpack config object.
+ * @param  {object} CONSTS an object of options
+ */
+module.exports = function getLoaders(CONSTS){
 	
-	const {DEV,PROD,PATHS,OUT,BUILD_TYPE_SERVER,BUILD_TYPE_CLIENT } = CONSTS;
+	const 
+		{ DEV
+		, PROD
+		, PATHS
+		, OUT
+		, BUILD_TYPE_SERVER
+		, BUILD_TYPE_CLIENT
+		, LOADERS
+		, LOADERS_SKIP
+		} = CONSTS;
+
 	const node_modules_regexp = /node_modules/;
+
+	const include = LOADERS.split(',');
+	const skip = LOADERS_SKIP.split(',');
+	const doSkip = _doSkip.bind(null,include,skip);
 
 	const sassLoader = 
 		[ 'sass-loader'
@@ -29,6 +61,7 @@ module.exports = function(CONSTS){
 				]
 			, include: PATHS.CLIENT
 			, exclude: node_modules_regexp
+			, skip: doSkip('js') || doSkip('javascript') || doSkip('scripts')
 			}
 		, 'ts':
 			{ extensions:[ 'ts', 'tsx' ]
@@ -47,6 +80,7 @@ module.exports = function(CONSTS){
 				]
 			, include: PATHS.CLIENT
 			, exclude: node_modules_regexp
+			, skip: doSkip('ts') || doSkip('typescript')  || doSkip('scripts')
 			}
 		, 'scss':
 			{ extensions:[ 'scss' , 'sass' ]
@@ -58,6 +92,7 @@ module.exports = function(CONSTS){
 					, sassLoader
 					] :
 					ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders,sassLoader]))
+			, skip:doSkip('scss') || doSkip('styles')
 			}
 		, 'styl':
 			{ extensions:[ 'styl' , 'stylus' ]
@@ -69,6 +104,7 @@ module.exports = function(CONSTS){
 					, 'stylus-loader'
 					] :
 					ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders,'stylus-loader']))
+			, skip:doSkip('stylus') || doSkip('styl') || doSkip('styles')
 			}
 		, 'less':
 			{ extensions:[ 'less' ]
@@ -80,6 +116,7 @@ module.exports = function(CONSTS){
 					, 'less-loader'
 					] :
 					ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders,'less-loader']))
+			, skip: doSkip('less') || doSkip('styles')
 			}
 		, 'css':
 			{ extensions:[ 'css' ]
@@ -90,6 +127,7 @@ module.exports = function(CONSTS){
 					, ...stylesLoaders
 					] :
 					ExtractTextPlugin.extract('style-loader',combineLoaderLoaders([...stylesLoaders]))
+			, skip: doSkip('css') || doSkip('styles')
 			}
 		, 'images':
 			{ extensions:['png','jpg','jpeg','gif','svg']
@@ -101,6 +139,7 @@ module.exports = function(CONSTS){
 						}
 					]
 				]
+			, skip: doSkip('images') || doSkip('assets')
 			}
 		, 'fonts':
 			{ extensions:['woff','woff2','ttf']
@@ -112,6 +151,7 @@ module.exports = function(CONSTS){
 						}
 					]
 				]
+			, skip: doSkip('fonts') || doSkip('assets')
 			}
 	});
 }

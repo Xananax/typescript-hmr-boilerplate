@@ -55,6 +55,14 @@ function _getFilenameFromUrl(outputPath,publicPath,url){
 	return filename ? pathJoin(outputPath, filename) : outputPath;
 }
 
+/**
+ * Returns a webpack middleware, comparable to the official
+ * webpack-dev-middleware.
+ *  
+ * @param  {webpack compiler} compiler
+ * @param  {Object} options an object of options
+ * @param  {WwebpackWatcher} watcher a WebpackWatcher object
+ */
 module.exports = function middleware(compiler,options,watcher){
 
 	//const fs = compiler.outputFileSystem = new MemoryFs();

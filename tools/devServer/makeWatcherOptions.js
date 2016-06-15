@@ -1,3 +1,9 @@
+/**
+ * Returns options for the webpack watcher
+ * Makes sure the options object exists and has the
+ * necessary values set
+ * @param  {object} options an optional options object
+ */
 module.exports = function makeWatcherOptions(options){
 	if(!options)
 		{ options = {}; }
