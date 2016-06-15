@@ -57,7 +57,7 @@ module.exports = function(CONSTS){
 	const output = 
 		{ path: PATHS.DISTRIBUTION
 		, filename: BUILD_TYPE_SERVER ? `${OUT.SERVER}/[name].js` : `${OUT.CLIENT}/[name].js` 
-		, publicPath: '/'
+		, publicPath: BUILD_TYPE_SERVER ? '/' : `${HOT_URL}`
 		, libraryTarget: BUILD_TYPE_SERVER ? 'commonjs2' : 'var'
 		, hotUpdateChunkFilename: BUILD_TYPE_SERVER ? `${OUT.SERVER}/hot/[id].[hash].hot-update.js` : `/${OUT.CLIENT}/hot/[id].[hash].hot-update.js`
 		, hotUpdateMainFilename: BUILD_TYPE_SERVER ? `${OUT.SERVER}/hot/[hash].hot-update.json` : `/${OUT.CLIENT}/hot/[hash].hot-update.json`

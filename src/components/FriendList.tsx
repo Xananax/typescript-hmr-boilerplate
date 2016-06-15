@@ -45,7 +45,7 @@ export class FriendList extends Component<FriendListProps,void>{
 
 		return (
 			<div className="friendListApp">
-				<h1>Da Bddfsdro'sdd dList</h1>
+				<h1>Da Bro's List</h1>
 				<AddFriendInput friendsAdd={actions.friendsAdd} />
 				<ul className="friendList">
 					{list}
