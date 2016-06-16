@@ -26,10 +26,9 @@ export default function getStore(initialState?:any){
 		);
 
 	if(module.hot){
-		const _reducers = require('../reducers').default;
 		module.hot.accept
 			( '../reducers'
-			, () => store.replaceReducer(_reducers)
+			, () => store.replaceReducer(require('../reducers').default)
 			);
 	}
 

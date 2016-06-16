@@ -19,7 +19,8 @@ const pageProps = {
 ,	stylesheets
 }
 
-const ie9 = `<!--[if lt IE 9]>
+const head = `<!doctype html>
+<!--[if lt IE 9]>
 <script>(function(ef){window.console = window.console || {log:ef,warn:ef,error:ef,dir:ef};}(function(){}));</script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
@@ -43,7 +44,7 @@ export default function renderPage(url,routes,store,Page,cb){
 			</Page>
 		)
 		const markup = renderToStaticMarkup(doc);
-		cb(null,status,ie9+markup);
+		cb(null,status,head+markup);
 		
 	})
 }

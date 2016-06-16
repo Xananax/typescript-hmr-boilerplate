@@ -46,8 +46,7 @@ module.exports = function getLoaders(CONSTS){
 	const include = LOADERS.split(',');
 	const skip = LOADERS_SKIP.split(',');
 	const doSkip = _doSkip.bind(null,include,skip);
-	babelConfig.compact = PROD;
-	
+
 	const sassLoader = 
 		[ 'sass-loader'
 		, { outputStyle: PROD ? 'compressed':'expanded'}
@@ -68,7 +67,6 @@ module.exports = function getLoaders(CONSTS){
 			{ extensions:[ 'ts', 'tsx' ]
 			, loader:
 				[	DEV && BUILD_TYPE_CLIENT && [ 'react-hot' ]
-				//,	[ 'babel', babelConfig ]
 				,	[ 'awesome-typescript-loader'
 					,	{ library:"es6"
 						, doTypeCheck:true

@@ -2,10 +2,19 @@ import { combineReducers } from 'redux';
 
 import actionsReducers from '../actions';
 
-const [reducer,actions,state] = actionsReducers; 
+let [reducer,actions,state] = actionsReducers; 
 
 export 
 	{ actions
 	, reducer
 	, state
 	};
+
+if(__DEV__){
+	if(module.hot){
+		module.hot.accept
+			( '../actions'
+			, () => [reducer,actions,state] = require('../actions').default
+			);
+	}
+}

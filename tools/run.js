@@ -1,5 +1,5 @@
-const babelConfig = require('./webpack/pluginsConfigs').babel;
-require('babel-register')(babelConfig);
+//const babelConfig = require('./webpack/pluginsConfigs').babel;
+//
 const fs = require('fs');
 const path = require('path');
 const getOptions = require('./webpack/utils/getOptions');

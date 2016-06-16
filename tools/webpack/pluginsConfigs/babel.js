@@ -4,6 +4,8 @@ module.exports =
 		, "react"
 		, "stage-1"
 		]
+	, ignore: 
+		[ '**/node_modules/**' ]
 	/** /
 	, extensions:
 		[ ".jsx"

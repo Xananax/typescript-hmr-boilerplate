@@ -4,9 +4,9 @@ module.exports = function runDevServer(server_name,client_compiler,client_config
 
 	let first = true
 
-	const { OUT, SERVER_BUNDLE_NAME, PATHS } = CONSTS;
+	const { OUT, SERVER_BUNDLE_NAME, PATHS, DIRS } = CONSTS;
 
-	const app = createApp(client_compiler,client_config,OUT.ASSETS,PATHS.ASSETS)
+	const app = createApp(client_compiler,client_config,OUT.ASSETS,PATHS.ASSETS);
 
 	function once(server){
 		first && server( 

@@ -40,7 +40,7 @@ module.exports = function getPlugins(CONSTS,loaders){
 		, BUILD_TYPE_CLIENT && PROD && new CopyWebpackPlugin
 			([
 				{ from: PATHS.ASSETS
-				, to: OUT.ASSETS
+				, to:   OUT.ASSETS
 				}
 			])
 		//, new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js')
