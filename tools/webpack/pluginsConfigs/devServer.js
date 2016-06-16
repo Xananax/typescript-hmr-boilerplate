@@ -1,6 +1,6 @@
 module.exports = 
-	{ noInfo: false
-	, quiet: true
+	{ noInfo: true
+	, quiet: false
 	, lazy: false
 	, publicPath: '/'
 	, hot:

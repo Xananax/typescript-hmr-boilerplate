@@ -1,32 +1,25 @@
 const options = require('../../config');
 const getOptions = require('../webpack/utils/getOptions');
 const getConfig = require('../webpack/utils/getConfig');
+const webpackErrorHandler = require('../webpack/utils/webpackErrorHandler');
 const webpack = require('webpack');
 
 function compile(CONSTS,cb){
 	const config = getConfig(CONSTS);
 	const compiler = webpack(config);
 	compiler.run(function(err, stats){
-		if(err){
-			return cb(err);
-		}
 
-		const jsonStats = stats.toJson();
-		if(jsonStats.errors.length > 0){
-			jsonStats.errors.forEach(function(e){
-				console.error(e);
-			});
-			cb(new Error(`webpack has errors`));
-		}
-		if(jsonStats.warnings.length > 0){
-			jsonStats.warnings.forEach(function(e){
-				console.warning(e);
-			});
-		}
-		if(cb){
-			return cb();
-		}
-		console.log(`webpack compilation done`);
+		webpackErrorHandler(err,stats,function(err){
+
+			if(err){return cb(err);}
+
+			if(cb){
+				return cb();
+			}
+			console.log(` -- build: webpack compilation done`);
+
+		})
+
 	});
 }
 
@@ -40,9 +33,9 @@ function buildServer(cb){
 	,	PROD:true
 	});
 
-	compile(CONSTS,function(){
+	compile(CONSTS,function(err){
 		console.log(`-- build: server built`);
-		cb && cb();
+		cb && cb(err,CONSTS);
 	});
 }
 
@@ -56,9 +49,9 @@ function buildClient(cb){
 	,	PROD:true
 	});
 
-	compile(CONSTS,function(){
+	compile(CONSTS,function(err){
 		console.log(`-- build: client built`);
-		cb && cb();
+		cb && cb(err,CONSTS);
 	});
 }
 

@@ -46,7 +46,8 @@ module.exports = function getLoaders(CONSTS){
 	const include = LOADERS.split(',');
 	const skip = LOADERS_SKIP.split(',');
 	const doSkip = _doSkip.bind(null,include,skip);
-
+	babelConfig.compact = PROD;
+	
 	const sassLoader = 
 		[ 'sass-loader'
 		, { outputStyle: PROD ? 'compressed':'expanded'}
