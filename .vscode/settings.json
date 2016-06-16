@@ -10,5 +10,6 @@
 		, "typings.json":true
 		, ".*":true
 		, "?sconfig.json":true
+		, "dist":true
 		}
 }

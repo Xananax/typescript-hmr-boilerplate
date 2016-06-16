@@ -24,7 +24,7 @@ const DEF =
 	, CLIENT_BUNDLE_NAME:process.env.CLIENT_BUNDLE_NAME || 'app'
 	, SERVER_BUNDLE_NAME:process.env.SERVER_BUNDLE_NAME || 'server'
 	, CLIENT_OUTPUT_DIR: process.env.CLIENT_OUTPUT_DIR  || 'js'
-	, CSS_OUTPUT_DIR:    process.env.CLIENT_OUTPUT_DIR  || 'css'
+	, STYLES_OUTPUT_DIR:  process.env.STYLE_OUTPUT_DIR   || 'css'
 	, FONTS_OUTPUT_DIR:  process.env.FONTS_OUTPUT_DIR   || 'fonts'
 	, IMAGES_OUTPUT_DIR: process.env.IMAGES_OUTPUT_DIR  || 'images'
 	, SERVER_OUTPUT_DIR: process.env.SERVER_OUTPUT_DIR  || ''

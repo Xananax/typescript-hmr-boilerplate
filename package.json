@@ -96,9 +96,10 @@
     "test": "mocha",
     "task": "node ./tools/run",
     "clean": "npm run task clean",
-    "create": "npm run task create",
-    "clean:create": "npm run task clean create",
-    "dev": "npm run task dev"
+    "dev": "npm run task clean:create:dev",
+    "build": "npm run task clean:create:build",
+    "build:client": "npm run task clean:create:buildclient",
+    "build:server": "npm run task clean:create:buildserver"
   },
   "repository": {
     "type": "git",

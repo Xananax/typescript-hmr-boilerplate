@@ -11,8 +11,13 @@ module.exports = function clean(_,CONSTS,cb){
 
 		if(err){return cb(err);}
 
-		console.log(`cleaned \`${dir}\``);
+		console.log(`-- clean: cleaned \`${dir}\``);
 
 		cb();
 	});
 } 
+
+
+module.exports.help = `
+ - removes the distribution directory 
+`;

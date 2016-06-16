@@ -19,7 +19,8 @@ export function Page(props){
 		, ...props.scripts
 		].filter(Boolean);
 	const stylesheets =
-		[ '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
+		[ 
+			//'//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
 		, ...props.stylesheets 
 		].filter(Boolean);
 	const metatags =
@@ -34,7 +35,7 @@ export function Page(props){
 		,	...props.metatags
 		].filter(Boolean);
 
-	const content = (props && props.children && Children.count(props.children)) || (<div>no content provided</div>);
+	const content = (props && props.children && Children.count(props.children) && props.children) || (<div>no content provided</div>);
 
 	const body = (<div id="Wrapper">
 		<h1>TestsddddddDDDDDdddds(</h1>

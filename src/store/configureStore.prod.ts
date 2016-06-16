@@ -5,8 +5,10 @@ import thunk from 'redux-thunk';
 export default function getStore(initialState?:any){
 
 	const enhancer = compose
-		( applyMiddleware()
-		, <any>thunk
+		( applyMiddleware
+			(
+				thunk
+			)
 		);
 
 	const store = createStore

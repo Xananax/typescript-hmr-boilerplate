@@ -1,0 +1,3 @@
+- WritePage task
+- Make dev server work in memory
+- bring styles from bootstrap

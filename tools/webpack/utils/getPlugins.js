@@ -22,7 +22,7 @@ module.exports = function getPlugins(CONSTS,loaders){
 		, BUILD_TYPE_CLIENT
 		} = CONSTS;
 
-	const includeTypeScript = loaders && loaders.some(function(loader){loader.extensions.indexOf('ts')>=0})
+	const INCLUDE_TYPESCRIPT = loaders && loaders.some(function(loader){loader.extensions.indexOf('ts')>=0})
 
 	// Ignore CSS:
 	// new webpack.IgnorePlugin(/\.(css|less|stylus|styl|scss|sass)$/)
@@ -37,7 +37,7 @@ module.exports = function getPlugins(CONSTS,loaders){
 			( 'require("source-map-support").install();'
 			, { raw: true, entryOnly: false }
 			)
-		, PROD && new CopyWebpackPlugin
+		, BUILD_TYPE_CLIENT && PROD && new CopyWebpackPlugin
 			([
 				{ from: PATHS.ASSETS
 				, to: OUT.ASSETS
@@ -45,13 +45,13 @@ module.exports = function getPlugins(CONSTS,loaders){
 			])
 		//, new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js')
 		, new webpack.DefinePlugin(GLOBS)
-		, includeTypeScript && new ForkCheckerPlugin()
+		, INCLUDE_TYPESCRIPT && new ForkCheckerPlugin()
 		, DEV && new webpack.optimize.OccurenceOrderPlugin()
 		, DEV && new webpack.HotModuleReplacementPlugin()
 		, new webpack.NoErrorsPlugin()
 		, PROD && new webpack.optimize.DedupePlugin()
-		, PROD && new webpack.optimize.UglifyJsPlugin(pluginsConfigs.uglify)
-		, BUILD_TYPE_CLIENT && PROD && new ExtractTextPlugin(OUT.CSS,pluginsConfigs.extractText)
+		, BUILD_TYPE_CLIENT && PROD && new webpack.optimize.UglifyJsPlugin(pluginsConfigs.uglify)
+		, BUILD_TYPE_CLIENT && PROD && new ExtractTextPlugin(OUT.STYLES,pluginsConfigs.extractText)
 		].filter(Boolean)
 	);
 }

@@ -5,10 +5,8 @@ const getOptions = require('../webpack/utils/getOptions');
 const webpackWatcher = require('./webpackWatcher');
 const makeWatcherOptions = require('./makeWatcherOptions');
 const createApp = require('./createApp');
+const assign = require('./assign');
 
-function assign(obj1,obj2){
-	return Object.assign({},obj1,obj2);
-}
 /**
  * Creates two compilers, one for the server and one for the client
  * Runs them, then runs the server file

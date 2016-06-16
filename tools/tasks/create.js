@@ -7,7 +7,11 @@ module.exports = function create(_,CONSTS,cb){
 
 	mkdirp(dir,(err)=>{
 		if(err){return  cb(err);}
-		console.log(`created \`${dir}\``);
+		console.log(`-- create: created \`${dir}\``);
 		cb();
 	})
 }
+
+module.exports.help = `
+ - creates the distribution directory
+`;

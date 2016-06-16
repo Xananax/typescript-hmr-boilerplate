@@ -6,24 +6,12 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'
 import DevTools from '../containers/DevTools';
 import getDebugSessionKey from './getDebugSessionKey';
 
-function windowDevToolsAvailable(){
-	return (typeof window === 'object' && typeof window.devToolsExtension !== 'undefined')
-}
-
-function getDevTools(){
-	return (
-		windowDevToolsAvailable() ? 
-			window.devToolsExtension() : 
-			DevTools.instrument()
-	);
-}
-
 export default function getStore(initialState?:any){
 
 	const enhancer = compose
 		( applyMiddleware
 			( reduxImmutableStateInvariant()
-			, <any>thunk
+			, thunk
 			)
 		//, getDevTools()
 		, DevTools.instrument()
@@ -46,4 +34,12 @@ export default function getStore(initialState?:any){
 	}
 
 	return store;
+}
+
+function windowDevToolsAvailable(){
+	return (typeof window === 'object' && typeof window.devToolsExtension !== 'undefined')
+}
+
+function getDevTools(){
+	return (windowDevToolsAvailable() ? window.devToolsExtension() : DevTools.instrument());
 }

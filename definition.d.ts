@@ -24,6 +24,11 @@ declare var __URL__:string;
 declare var __HOT_PORT__:number;
 declare var __HOT_URL__:string;
 declare var __HOSTNAME__:string;
+declare var __STYLE_FILE__:string;
+declare var __JS_FILE__:string;
+declare var __FONTS_DIR__:string;
+declare var __IMAGES_DIR__:string;
+declare var __STATIC_RELATIVE_DIR__:string;
 
 interface Window{
 	devToolsExtension:Function;

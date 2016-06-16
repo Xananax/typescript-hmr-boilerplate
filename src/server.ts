@@ -1,31 +1,25 @@
 import http from 'http';
 import express from 'express';
 
-let requestHandler = require('./server/handler').requestHandler;
-let swap;
-const app = express();
+let requestHandler = __DEV__ ? 
+	require('./server/server.dev').default : 
+	require('./server/server.prod').default
+;
 
-export default function listen(devApp,cb){
+const PORT = process.env.PORT || __PORT__;
 
-	devApp.swap(requestHandler);
-	swap = devApp.swap;
+export default function listen(devApp?,cb?){
 
-	app.use(devApp);
+	const app = express();
+
+	requestHandler(app,cb,devApp)
 
 	const server = http.createServer(app);
 
-	server.listen(__PORT__,()=>{
+	server.listen(PORT,()=>{
 		console.log(`listening on ${__URL__}`);
 		cb && cb();
 	});
 
 	return server;
-
-}
-
-if(module.hot) {
-	module.hot.accept("./server/handler",()=>{
-		requestHandler = require("./server/handler").requestHandler;
-		swap && swap(requestHandler);
-	});
 }

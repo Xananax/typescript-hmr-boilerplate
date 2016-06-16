@@ -60,6 +60,7 @@ module.exports = function webpackWatcher(name,compiler,options){
 					{ 
 						return; 
 					}
+					
 				var displayStats = (!options.quiet && options.stats !== false);
 
 				if(	displayStats && 
@@ -76,7 +77,7 @@ module.exports = function webpackWatcher(name,compiler,options){
 					console.info(`${name}: bundle is now VALID.`);
 				}
 
-					console.info(`${name}: rebuilt`);
+				console.info(`${name}: rebuilt`);
 				const cbs = callbacks;
 				callbacks = [];
 				cbs.forEach(

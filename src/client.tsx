@@ -1,25 +1,26 @@
 import './styles/bootstrap.min.css';
 import './styles/styles.scss';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import {match, browserHistory} from 'react-router';
 import configureStore  from './store/configureStore';
 
 const store = configureStore();
+let routes = require('./routes').routes;
 
-const Comp = __DEV__ ? 
-	require('./client.dev').default : 
-	require('./client.prod').default
+const render =__DEV__ ? 
+	require('./client/client.dev').default : 
+	require('./client/client.prod').default
 ;
 
-// Render the React application to the DOM
-ReactDOM.render
-	(
-		(
-			<Provider store={store}>
-				{Comp}
-			</Provider>
-		)
-	,	document.getElementById('Root')
-	);
+match(
+	{ history:browserHistory
+	, routes 
+	}
+,	(error, redirectLocation, renderProps) => render(store,renderProps)
+);
+
+if(module.hot) {
+	module.hot.accept("./routes",()=>{
+		routes = require("./routes").routes;
+	});
+}

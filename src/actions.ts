@@ -1,5 +1,5 @@
-import assign from '../utils/assign';
-import {Store,ActionsReducers} from '../utils/ActionsReducers';
+import assign from './utils/assign';
+import {Store,ActionsReducers} from './utils/ActionsReducers';
 
 export default ActionsReducers({
 	friends:Store(
