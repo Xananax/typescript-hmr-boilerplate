@@ -34,6 +34,7 @@ const DEF =
 	, BUILD_TYPE:        process.env.BUILD_TYPE         || 'client'
 	, LOADERS:           process.env.LOADERS            || 'js,ts,css,scss,stylus,less,images,fonts'
 	, LOADERS_SKIP:      process.env.LOADERS_SKIP       || ''
+	, STORAGE:            process.env.STORAGE           || 'disk' // used for dev server, can be 'disk' or 'memory'
 	};
 
 DEF.DIRS =

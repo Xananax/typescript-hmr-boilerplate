@@ -33,6 +33,7 @@ module.exports = function getConfig(CONSTS){
 		, SERVER_BUNDLE_NAME
 		, HOT_URL
 		, OUT
+		, STORAGE_IS_MEMORY
 		} = CONSTS;
 
 	const target = BUILD_TYPE_SERVER ? 'node' : 'web'; 
@@ -58,7 +59,7 @@ module.exports = function getConfig(CONSTS){
 		);
 
 	const output = 
-		{ path: PATHS.DISTRIBUTION
+		{ path: STORAGE_IS_MEMORY ? '/' : PATHS.DISTRIBUTION
 		, filename: BUILD_TYPE_SERVER ? `${OUT.SERVER}/[name].js` : `${OUT.CLIENT}/[name].js` 
 		, publicPath: BUILD_TYPE_SERVER ? '/' : `${HOT_URL}`
 		, libraryTarget: BUILD_TYPE_SERVER ? 'commonjs2' : 'var'

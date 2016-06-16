@@ -1,4 +1,4 @@
-# DevServer
+# DevServer-tools
 
 A suite of tools that allow concurrent running of a server and its client files, both with hot reloading enabled.
 

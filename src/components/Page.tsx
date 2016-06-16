@@ -15,13 +15,10 @@ export function Page(props){
 
 	const {title,description} = props; 
 	const scripts =
-		[ '/js/app.js'
-		, ...props.scripts
+		[ ...props.scripts
 		].filter(Boolean);
 	const stylesheets =
-		[ 
-			//'//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
-		, ...props.stylesheets 
+		[ ...props.stylesheets 
 		].filter(Boolean);
 	const metatags =
 		[	{ charSet:'utf-8' }
@@ -38,10 +35,15 @@ export function Page(props){
 	const content = (props && props.children && Children.count(props.children) && props.children) || (<div>no content provided</div>);
 
 	const body = (<div id="Wrapper">
-		<h1>TestsddddddDDDDDdddds(</h1>
+		<h1>Tests(</h1>
 		<div id='Root'>{content}</div>
 	</div>)
-	return (<HTMLDocument title={title} scripts={scripts} stylesheets={stylesheets} metatags={metatags}>
+	return (<HTMLDocument 
+		title={title}
+		scripts={scripts} 
+		stylesheets={stylesheets} 
+		metatags={metatags}
+		>
 		{body}	
 	</HTMLDocument>);
 }

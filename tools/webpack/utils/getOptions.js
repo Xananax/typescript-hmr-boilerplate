@@ -112,6 +112,8 @@ module.exports = function getOptions(env){
 		, __STATIC_RELATIVE_DIR__:DIRS.ASSETS
 		};
 
+	const STORAGE =  (env.STORAGE) || DEF.STORAGE;
+
 	return (
 		{ DEV
 		, PROD
@@ -130,6 +132,8 @@ module.exports = function getOptions(env){
 		, OUT
 		, ENV
 		, RELATIVE
+		, STORAGE
+		, STORAGE_IS_MEMORY: (STORAGE == 'memory')
 		, GLOBALS
 		, SERVER_BUNDLE_NAME
 		, STYLE_BUNDLE_NAME

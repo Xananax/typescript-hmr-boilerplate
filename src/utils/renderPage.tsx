@@ -6,12 +6,17 @@ import { Provider } from 'react-redux';
 
 const renderToStaticMarkup = ReactDOM.renderToStaticMarkup;
 
+const scripts = 
+	[ __JS_FILE__ ]
+
+const stylesheets = 
+	[ '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
+	, __PROD__ && __STYLE_FILE__ 
+	].filter(Boolean);
+
 const pageProps = {
-	scripts:
-		[ __JS_FILE__ ]
-,	stylesheets: __DEV__ ? 
-		[] : 
-		[ __STYLE_FILE__ ]
+	scripts
+,	stylesheets
 }
 
 export default function renderPage(url,routes,store,Page,cb){

@@ -4,9 +4,9 @@ const getConfig = require('../webpack/utils/getConfig');
 const getOptions = require('../webpack/utils/getOptions');
 const webpackWatcher = require('./webpackWatcher');
 const makeWatcherOptions = require('./makeWatcherOptions');
-const createApp = require('./createApp');
 const assign = require('./assign');
-
+const MemoryFS = require("memory-fs");
+const runDevServer = require('./runDevServer');
 /**
  * Creates two compilers, one for the server and one for the client
  * Runs them, then runs the server file
@@ -25,7 +25,15 @@ module.exports = function devServer(CONSTS,cb){
 	const server_compiler = webpack(server_config);
 	const client_compiler = webpack(client_config);
 	
-	const { OUT, DIRS, PATHS, SERVER_BUNDLE_NAME , CLIENT_BUNDLE_NAME } = SERVER_CONSTS;
+	const { OUT, DIRS, PATHS, SERVER_BUNDLE_NAME , CLIENT_BUNDLE_NAME , STORAGE_IS_MEMORY } = SERVER_CONSTS;
+
+	const fs = STORAGE_IS_MEMORY ? new MemoryFS() : null;
+	
+	if(STORAGE_IS_MEMORY){
+		server_compiler.outputFileSystem = fs;
+		client_compiler.outputFileSystem = fs;
+	}
+
 
 	const root_path = path.resolve(DIRS.ROOT,DIRS.DISTRIBUTION); 
 	const server_bundle_path = path.resolve(root_path, OUT.SERVER, SERVER_BUNDLE_NAME)+'.js';
@@ -38,27 +46,7 @@ module.exports = function devServer(CONSTS,cb){
 	const client_name = `webpack [client]`;
 	const server_watcher = webpackWatcher(server_name,server_compiler,server_watcherOptions);
 	const client_watcher = webpackWatcher(client_name,client_compiler,client_watcherOptions);
-	//const fs = new MemoryFS();
-	//compiler.outputFileSystem = fs;
-
-	//const middleware = connectMiddleware(client_compiler,client_watcherOptions,client_watcher);
-
-	const app = createApp(client_compiler,client_config,OUT.ASSETS,PATHS.ASSETS)
-
-	let first = true
-
-	function once(){
-		first && require(server_bundle_path).default
-			( app
-			, function()
-				{
-					console.log(`${server_name}: first compilation succeeded`);
-					cb && cb();
-				}
-			);
-		first = false;
-	}
-
+	
 	client_watcher.watch(function(){
 
 		console.log(`${client_name}: client file created at \`${client_bundle_path}\``);
@@ -67,7 +55,7 @@ module.exports = function devServer(CONSTS,cb){
 			
 			console.log(`${server_name}: server path \`${server_bundle_path}\``);
 
-			once();
+			runDevServer(server_name,client_compiler,client_config,SERVER_CONSTS,server_bundle_path,fs,cb);
 		});
 	})
 
