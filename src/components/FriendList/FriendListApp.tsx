@@ -4,8 +4,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { actions } from '../reducers';
-import {FriendList} from '../components/FriendList';
+import { actions } from '../../actions';
+import {FriendList} from './FriendList';
 
 function mapStateToProps(state) {
 	return (

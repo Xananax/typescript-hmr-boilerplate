@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import {SimpleTextInput} from './SimpleTextInput';
+import {SimpleTextInput} from '../SimpleTextInput';
 
 
 export class InfoFetcher extends Component<any,any>{

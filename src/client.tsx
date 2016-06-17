@@ -1,25 +1,41 @@
 import './styles/styles.scss';
 
-import {match, browserHistory} from 'react-router';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {match} from 'react-router';
+import { Router , browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
 import configureStore  from './store/configureStore';
+import {routes} from './routes';
 
 const store = configureStore();
-let routes = require('./routes').routes;
 
-const render =__DEV__ ? 
-	require('./client/client.dev').default : 
-	require('./client/client.prod').default
-;
+const conf = {routes};
+
+let DevTools = __DEV__ ? require('./components/DevTools').default : false;
+
+
+function render(store,renderProps){
+	ReactDOM.render(
+		<Provider store={store}>
+			<div id="Wrapper">
+				<Router {...renderProps} />
+				{ DevTools && <DevTools /> }
+			</div>
+		</Provider>
+	, 	document.getElementById('Root')	
+	);
+}
 
 match(
 	{ history:browserHistory
-	, routes 
+	, routes:conf.routes 
 	}
 ,	(error, redirectLocation, renderProps) => render(store,renderProps)
 );
 
 if(module.hot) {
 	module.hot.accept("./routes",()=>{
-		routes = require("./routes").routes;
+		conf.routes = require("./routes").routes;
 	});
 }

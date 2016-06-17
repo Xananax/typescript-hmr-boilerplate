@@ -97,7 +97,8 @@
     "dev": "npm run task clean:create:dev",
     "build": "npm run task clean:create:build",
     "build:client": "npm run task clean:create:buildclient",
-    "build:server": "npm run task clean:create:buildserver"
+    "build:server": "npm run task clean:create:buildserver",
+    "start": "npm run task clean:create:dev"
   },
   "repository": {
     "type": "git",

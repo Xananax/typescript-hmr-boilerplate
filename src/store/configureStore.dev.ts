@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import {reducer as rootReducer} from '../reducers';
+import {reducer as rootReducer} from '../actions';
 import thunk from 'redux-thunk';
 import { persistState } from 'redux-devtools';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'
-import DevTools from '../containers/DevTools';
+import DevTools from '../components/DevTools';
 import getDebugSessionKey from './getDebugSessionKey';
 
 export default function getStore(initialState?:any){
@@ -27,8 +27,8 @@ export default function getStore(initialState?:any){
 
 	if(module.hot){
 		module.hot.accept
-			( '../reducers'
-			, () => store.replaceReducer(require('../reducers').default)
+			( '../actions'
+			, () => store.replaceReducer(require('../actions').reducer)
 			);
 	}
 

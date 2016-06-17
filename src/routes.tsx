@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, IndexRoute, Redirect } from 'react-router';
 
 import {App} from './components/App';
-import FriendListApp from './containers/FriendListApp';
-import InfoFetcherApp from './containers/InfoFetcherApp';
+import FriendListApp from './components/FriendList/FriendListApp';
+import InfoFetcherApp from './components/InfoFetcher/InfoFetcherApp';
 import PageNotFound from './components/PageNotFound';
 
 export const routes = (

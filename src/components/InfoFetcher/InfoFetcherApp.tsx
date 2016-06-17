@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actions } from '../reducers'
-import {InfoFetcher} from '../components/InfoFetcher'; 
+import { actions } from '../../actions'
+import {InfoFetcher} from './InfoFetcher'; 
 
 function mapStateToProps(state) {
 	return (

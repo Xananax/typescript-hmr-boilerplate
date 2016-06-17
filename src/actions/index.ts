@@ -1,34 +1,18 @@
-import {ActionsReducers} from '../utils/ActionsReducers';
-import API from './api';
-import Friends from './friends';
-import Notes from './notes';
+import actionsReducers from './actions';
 
-let api = API;
-let friends = Friends
-let notes = Notes;
+let [reducer,actions,state] = actionsReducers; 
 
-function makeActionsReducers(){
-	return ActionsReducers({
-		friends, api, notes	
-	});
-}
-
-let actionsReducers = makeActionsReducers();
-
-
-export default actionsReducers
+export 
+	{ actions
+	, reducer
+	, state
+	};
 
 if(__DEV__){
 	if(module.hot){
 		module.hot.accept
-			( ['./api','./friends','./notes']
-			, () => 
-				{
-					api = require('./api').default;
-					friends = require('./friends').default;
-					notes = require('./notes').default
-					makeActionsReducers();
-				}
+			( './actions'
+			, () => [reducer,actions,state] = require('./actions').default
 			);
 	}
 }
