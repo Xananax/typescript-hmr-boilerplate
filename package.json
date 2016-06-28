@@ -66,6 +66,7 @@
     "bluebird": "3.4.0",
     "classnames": "2.2.5",
     "express": "4.13.4",
+    "extend": "3.0.0",
     "history": "3.0.0",
     "jquery": "3.0.0",
     "node-fetch": "1.5.3",

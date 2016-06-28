@@ -4,6 +4,7 @@
     "classnames": "registry:dt/classnames#0.0.0+20160316155526",
     "express": "registry:dt/express#4.0.0+20160317120654",
     "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160602151406",
+    "extend": "registry:dt/extend#2.0.0+20160316155526",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "node": "registry:dt/node#6.0.0+20160608110640",
     "qs": "registry:dt/qs#0.0.0+20160317120654",
@@ -20,5 +21,8 @@
     "redux-thunk": "registry:dt/redux-thunk#2.0.1+20160317120654",
     "serve-static": "registry:dt/serve-static#0.0.0+20160606155157",
     "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
+  },
+  "dependencies": {
+    "webpack": "registry:npm/webpack#1.12.9+20160418172948"
   }
 }

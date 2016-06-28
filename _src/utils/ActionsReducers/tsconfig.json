@@ -1,0 +1,19 @@
+{ "compilerOptions":
+	{ "module": "commonjs"
+	, "target":"es6"
+	, "moduleResolution": "node"
+	, "noImplicitAny": false
+	, "experimentalDecorators": true
+	, "emitDecoratorMetadata": true
+	, "removeComments": true
+	, "preserveConstEnums": true
+	, "allowSyntheticDefaultImports":true
+	, "jsx":"react"
+	, "outDir": "./dist"
+	, "sourceMap": true
+	}
+, "filesGlob":
+	[ "./definition.d.ts"
+	, "./typings/index.d.ts"
+	]
+}
